@@ -1,14 +1,13 @@
 @echo off
-:: Run this once to compile obs_controller.py into a single .exe
-:: Requirements: pip install pyinstaller keyboard
+echo Closing any running instance of OBS Controller...
+taskkill /f /im "OBS Controller.exe" 2>nul
+timeout /t 1 /nobreak >nul
 
-pip install pyinstaller keyboard --quiet
+echo Installing dependencies...
+pip install pyinstaller --quiet
 
-pyinstaller ^
-  --onefile ^
-  --noconsole ^
-  --name "OBS Controller" ^
-  obs_controller.py
+echo Building...
+pyinstaller --onefile --noconsole --name "OBS Controller" obs_controller.py
 
 echo.
 echo Done. Find OBS Controller.exe in the dist\ folder.
